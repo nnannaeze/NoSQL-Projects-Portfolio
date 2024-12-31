@@ -326,7 +326,7 @@ SELECT COUNT(*) FROM movies;
 count
 100
 ```
-
+![img](a1.png)
 ---
 ####  Creating an Index for Efficient Queries
 To optimize queries involving the `rating` column, I created an index:
@@ -344,7 +344,7 @@ DESCRIBE TABLE movies;
 count
 100
 ```
-
+![img](a3.png)
 The output included a `CREATE INDEX` statement, confirming the index creation.
 
   
