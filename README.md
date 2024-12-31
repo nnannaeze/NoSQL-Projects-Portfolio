@@ -80,11 +80,16 @@ curl -O https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMSk
 ```
 This command downloaded the movies.json file, which contains data on various movies, including fields such as title, genre, year, director, and more.
 ![img](2.png)
+
+
 To import the JSON data into MongoDB, I used the `mongoimport` tool. The command below was executed from the command line:
 
 ```bash
 mongoimport -u root -p nnannaeze@77 --authenticationDatabase admin --db entertainment --collection movies --file movies.json --host localhost
 ```
+
+![img](Untitled design (2).png)
+
 This command connects to the local MongoDB instance, authenticates the user with the specified password, and loads the `movies.json` file into the `movies` collection in the `entertainment` database.
 #### Breakdown of the Command:
 
