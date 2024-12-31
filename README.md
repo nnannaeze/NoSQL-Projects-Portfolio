@@ -79,7 +79,7 @@ To get started with the project, I obtained the dataset in JSON format (movie in
 curl -O https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMSkillsNetwork-DB0151EN-edX/labs/FinalProject/movies.json
 ```
 This command downloaded the movies.json file, which contains data on various movies, including fields such as title, genre, year, director, and more.
-
+![img](2.png)
 To import the JSON data into MongoDB, I used the `mongoimport` tool. The command below was executed from the command line:
 
 ```bash
