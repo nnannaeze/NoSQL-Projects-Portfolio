@@ -328,7 +328,7 @@ count
 ```
 ![img](https://github.com/nnannaeze/NoSQL-Projects-Portfolio/blob/main/a1.PNG)
 ---
-####  Creating an Index for Efficient Queries
+#### 4. Creating an Index for Efficient Queries
 To optimize queries involving the `rating` column, I created an index:
 ```sql
 CREATE INDEX ON movies (rating);
@@ -340,9 +340,30 @@ DESCRIBE TABLE movies;
 ```
 ---
 #### Output
-
+![img](https://github.com/nnannaeze/NoSQL-Projects-Portfolio/blob/main/a3.PNG)
 
 The output included a `CREATE INDEX` statement, confirming the index creation.
 
+#### 5: Querying Movies with Rating 'G'
+Using the newly created index, I queried the movies table to count the number of `movies` with a rating of `G`:
+```sql
+SELECT COUNT(*) FROM movies WHERE rating = 'G';
+```
+
+---
+#### Output
+```sql
+count
+34
+```
+This workflow highlights my proficiency with Cassandra, including schema design, data import, and executing optimized queries.
   
 
+---
+
+## Conclusion
+This portfolio demonstrates my proficiency in working with NoSQL databases, particularly MongoDB and Apache Cassandra, for handling diverse datasets in various formats. By performing key tasks such as data importation, querying, exporting, and schema design, I have showcased my ability to adapt to the unique features and requirements of each NoSQL platform.
+
+In this project, I imported a movie dataset into MongoDB, executed complex aggregation queries, and exported the data into CSV for further analysis. Additionally, in Apache Cassandra, I designed a suitable schema, imported data from a CSV file, and created indexes to enhance query performance. These tasks reflect the practical skills necessary for efficiently managing and retrieving insights from large volumes of unstructured data.
+
+Through this hands-on experience, I have not only gained a deeper understanding of NoSQL technologies but also demonstrated my ability to design and implement workflows that support data ingestion, processing, and analytical capabilities for real-world applications. This project has equipped me with the tools and knowledge to handle diverse datasets, and I am now capable of managing data across multiple databases and environments, providing strong support for data-driven decision-making processes.
