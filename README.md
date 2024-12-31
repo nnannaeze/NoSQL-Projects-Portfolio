@@ -40,7 +40,7 @@ This project leverages several tools and technologies to manage NoSQL databases 
 
 These tools ensure smooth integration, management, and querying of the databases involved in the project.
 
-## Setting the Environment
+## Setting the Environment For MongoDB
 
 ### 1. Start MongoDB
 Before working with MongoDB, we need to start the MongoDB service. This is done by running the following command in the terminal:
@@ -49,6 +49,10 @@ Before working with MongoDB, we need to start the MongoDB service. This is done 
 mongod --dbpath /data/db
 ```
 This command starts the MongoDB server and sets the database path to `/data/db`, which is where MongoDB will store its data files.
+
+![img](https://github.com/nnannaeze/NoSQL-Projects-Portfolio/blob/main/nosql%20a3.png)
+
+
 #### 2. Open MongoDB Shell (mongosh)
 Next, open a new terminal window and start the mongosh environment to interact with the MongoDB instance:
 ```bash
@@ -91,6 +95,7 @@ mongoimport -u root -p nnannaeze@77 --authenticationDatabase admin --db entertai
 ![img](https://github.com/nnannaeze/NoSQL-Projects-Portfolio/blob/main/Untitled%20design%20(2).png)
 
 This command connects to the local MongoDB instance, authenticates the user with the specified password, and loads the `movies.json` file into the `movies` collection in the `entertainment` database.
+
 #### Breakdown of the Command:
 
 - `-u root`: Specifies the username for authentication.
@@ -103,26 +108,63 @@ This command connects to the local MongoDB instance, authenticates the user with
 
 This command successfully imports the movie data from `movies.json` into the MongoDB instance. The data is now available in the `movies` collection of the `training` database, ready for further querying and analysis.
 
-### 2. **Querying Data in MongoDB**
-After the data was imported, I ran several queries to retrieve valuable insights. Below are some example queries and their descriptions:
-**Sample movie document:**
-```json
-{
-  "_id": "9",
-  "title": "The Lost City of Z",
-  "genre": "Action,Adventure,Biography",
-  "Description": "A true-life drama, centering on British explorer Col. Percival Fawcett, who disappeared while searching for a mysterious city in the Amazon in the 1920s.",
-  "Director": "James Gray",
-  "Actors": "Charlie Hunnam, Robert Pattinson, Sienna Miller, Tom Holland",
-  "year": 2016,
-  "Runtime (Minutes)": 141,
-  "rating": "unrated",
-  "Votes": 7188,
-  "Revenue (Millions)": 8.01,
-  "Metascore": 78
-}
+---
+#### Output
+```bash
+2024-12-31T11:11:06.830+0100    connected to: mongodb://localhost/
+2024-12-31T11:11:07.471+0100    100 document(s) imported successfully. 0 document(s) failed to import.
 ```
--  ***Query to find the year with the most number of movie releases:***
+---
+### 2. **Querying Data in MongoDB**
+I'll get back into the mongosh environment using the command 
+```bash
+mongosh -u root -p nnannaeze@77 --authenticationDatabase admin
+```
+After the data was imported, I ran several queries to retrieve valuable insights. Below are some example queries and their descriptions:
+
+**Sample movie document:**
+To get a feel of the documents in the colection `movie`, I'll use the `find` and `limit` command 
+  ```javascript
+  db.movies.find().limit(2)
+  ```
+This will ouput 
+
+
+  ```json
+  [
+  {
+    "_id": "3",
+    "title": "Split",
+    "genre": "Horror,Thriller",
+    "Description": "Three girls are kidnapped by a man with a diagnosed 23 distinct personalities. They must try to escape before the apparent emergence of a frightful new 24th.",
+    "Director": "M. Night Shyamalan",
+    "Actors": "James McAvoy, Anya Taylor-Joy, Haley Lu Richardson, Jessica Sula",
+    "year": 2016,
+    "Runtime (Minutes)": 117,
+    "rating": "unrated",
+    "Votes": 157606,
+    "Revenue (Millions)": 138.12,
+    "Metascore": 62
+  },
+  {
+    "_id": "4",
+    "title": "Sing",
+    "genre": "Animation,Comedy,Family",
+    "Description": "In a city of humanoid animals, a hustling theater impresario's attempt to save his theater with a singing competition becomes grander than he anticipates even as its finalists' find that their lives will never be the same.",
+    "Director": "Christophe Lourdelet",
+    "Actors": "Matthew McConaughey, Reese Witherspoon, Seth MacFarlane, Scarlett Johansson",
+    "year": 2016,
+    "Runtime (Minutes)": 108,
+    "rating": "unrated",
+    "Votes": 60545,
+    "Revenue (Millions)": 270.32,
+    "Metascore": 59
+  }
+]
+
+
+  ```
+***Query to find the year with the most number of movie releases:***
   ```javascript
   db.movies.aggregate([
   { $group: { _id: "$year", count: { $sum: 1 } } },
@@ -134,42 +176,63 @@ After the data was imported, I ran several queries to retrieve valuable insights
   
   #### Explanation:
 
-  -  `$group`: Groups the documents by the year field and calculates the total count of movies released each year.
+  -`$group`: Groups the documents by the year field and calculates the total count of movies released each year.
   
-  -  `$sum`: 1: Adds 1 for each document grouped by year, effectively counting the number of movies per year.
+  -`$sum`: 1: Adds 1 for each document grouped by year, effectively counting the number of movies per year.
   
-  -  `$sort`: Sorts the results in descending order based on the count field, so the year with the most movies appears first.
+  -`$sort`: Sorts the results in descending order based on the count field, so the year with the most movies appears first.
   
-  -  `$limit: 1`: Limits the result to only the year with the highest count of movies.
+  -`$limit: 1`: Limits the result to only the year with the highest count of movies.
+ 
+---
+  #### Output
+  ```javascript
+  [ { _id: 2016, count: 73 } ]
+  ```
+ ---   
 
   
--  ***Query to find the count of movies released after the year 1999:***
-  ```javascript
-  db.movies.countDocuments({ year: { $gt: 1999 } })
-  ```
+***Query to find the count of movies released after the year 1999:***
+```javascript
+db.movies.countDocuments({ year: { $gt: 1999 } })
+```
+  
   
   #### Explanation:
-  -  This query counts all movies where the year field is greater than 1999, effectively giving the total number of movies released after that year.
-  
-  
--  ***Query to find the average votes for movies released in 2007:***
+  - This query counts all movies where the year field is greater than 1999, effectively giving the total number of movies released after that year.
+  ---    
+  #### Output
+  ```javascript
+  99
+  ```
+  ---
+
+  ***Query to find the average votes for movies released in 2007:***
   ```javascript
   db.movies.aggregate([
   { $match: { year: 2007 } },
   { $group: { _id: null, averageVotes: { $avg: "$Votes" } } }
   ])
   ```
+  
   This query filters the movies for the year 2007 and calculates the average number of votes.
   #### Explanation:
 
   - `$match`: Filters the documents to include only those where the `year` is 2007.
+  
   - `$group`: Calculates the average (`$avg`) of the `Votes` field for movies released in that year. The result is returned as `averageVotes`.
-
-    
+  ---
+  #### Output
+  ```javascript
+  [ { _id: null, averageVotes: 192.5 } ]
+  ```
+ ---   
 ###  3. **Exporting Data from MongoDB**
-To export a subset of fields from the movies collection into a CSV file, I used the `mongoexport`command with the specific fields. The following command exports the `_id`, `title`, `year`, `rating`, and `director` fields:
+To export a subset of fields from the movies collection into a CSV file, I did the following;
+-  I used the `exit` command to return to bash shell,
+-  I used the `mongoexport`command with the specific fields. The following command exports the `_id`, `title`, `year`, `rating`, and `director` fields:
 ```bash
-mongoexport -u root -p nnannaeze@77 --authenticationDatabase admin --db training --collection movies --fields _id,title,year,rating,director --type=csv --out partial_data.csv
+mongoexport -u root -p nnannaeze@77 --authenticationDatabase admin --db entertainment --collection movies --fields _id,title,year,rating,Director --type=csv --out partial_data.csv
 ```
 #### Explanation:
 
@@ -178,6 +241,111 @@ mongoexport -u root -p nnannaeze@77 --authenticationDatabase admin --db training
 - `--out partial_data.csv`: Defines the output file as `partial_data.csv`.
 
 This command exports the specified fields from the `movies` collection to a CSV file. The resulting CSV file can be opened in tools like Excel or used for further analysis.
+
+---
+#### Output
+```bash
+2024-12-31T17:09:01.362+0100    connected to: mongodb://localhost/
+2024-12-31T17:09:01.427+0100    exported 100 records
+```
+## Setting the Environment for Cassandra in WSL
+To prepare my environment for working with `Cassandra` in WSL, I performed the following:
+
+#### 1: Started Cassandra
+I began by switching to the cassandra user using the following command:
+```bash
+sudo -i -u cassandra
+```
+Next, I started the Cassandra server by running:
+```bash
+/opt/cassandra/bin/cassandra
+```
+This initialized the Cassandra process and prepared it for accepting queries.
+#### 2: Opened the cqlsh Shell
+In a new terminal, I launched the Cassandra Query Language Shell (cqlsh) to interact with the database:
+```bash
+/opt/cassandra/bin/cqlsh
+```
+This allowed me to execute CQL commands for creating tables, inserting data, and running queries.
+
+---
+#### Output
+
+```shell
+Connected to Test Cluster at 127.0.0.1:9042
+[cqlsh 6.2.0 | Cassandra 5.0.2 | CQL spec 3.4.7 | Native protocol v5]
+Use HELP for help.
+cqlsh>
+
+```
+## Cassandra Schema Design and Data Workflow
+This section details the steps I performed to set up a Cassandra environment, create a schema, and load and query data from partial_data.csv.
+####  1: Creating the Keyspace and Table
+To organize the data efficiently, I created a keyspace named `entertainment` and designed the `movies` table with the following schema:
+
+**Creating the Keyspace**
+```sql
+CREATE KEYSPACE entertainment 
+WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+```
+I then set the keyspace for subsequent operations:
+```sql
+USE entertainment;
+```
+
+**Creating the Table**
+The `movies` table was designed with appropriate data types for the fields in `partial_data.csv`:
+```sql
+CREATE TABLE movies (
+    id TEXT,
+    title TEXT,
+    year INT,
+    rating TEXT,
+    director TEXT,
+    PRIMARY KEY (id)
+);
+
+```
+#### 2: Importing Data from partial_data.csv
+The data in `partial_data.csv` was imported into the `movies` table using the following command
+```sql
+COPY entertainment.movies (id, title, year, rating, director) 
+FROM '/root/partial_data.csv' 
+WITH HEADER = TRUE;
+```
+This command ensures the data aligns with the table’s structure and includes the column headers from the CSV file for accurate mapping.
+#### 3: Verifying Data Import
+To confirm the data import, I executed a query to count the total rows in the `movies` table:
+```sql
+SELECT COUNT(*) FROM movies;
+```
+
+---
+#### Output
+```sql
+count
+100
+```
+
+---
+####  Creating an Index for Efficient Queries
+To optimize queries involving the `rating` column, I created an index:
+```sql
+CREATE INDEX ON movies (rating);
+
+```
+To ensure the index was created, I described the `movies` table:
+```
+DESCRIBE TABLE movies;
+```
+---
+#### Output
+```sql
+count
+100
+```
+
+The output included a `CREATE INDEX` statement, confirming the index creation.
 
   
 
