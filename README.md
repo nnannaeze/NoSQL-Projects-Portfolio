@@ -88,7 +88,7 @@ To import the JSON data into MongoDB, I used the `mongoimport` tool. The command
 mongoimport -u root -p nnannaeze@77 --authenticationDatabase admin --db entertainment --collection movies --file movies.json --host localhost
 ```
 
-![img](Untitled design (2).png)
+![img](https://github.com/nnannaeze/NoSQL-Projects-Portfolio/blob/main/Untitled%20design%20(2).png)
 
 This command connects to the local MongoDB instance, authenticates the user with the specified password, and loads the `movies.json` file into the `movies` collection in the `entertainment` database.
 #### Breakdown of the Command:
