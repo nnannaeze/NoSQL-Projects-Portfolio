@@ -39,8 +39,39 @@ This project leverages several tools and technologies to manage NoSQL databases 
   - **Bash**: For shell scripting to automate various database tasks such as imports and exports.
 
 These tools ensure smooth integration, management, and querying of the databases involved in the project.
-## MongoDB Workflow
 
+## Setting the Environment
+
+### 1. Start MongoDB
+Before working with MongoDB, we need to start the MongoDB service. This is done by running the following command in the terminal:
+
+```bash
+mongod --dbpath /data/db
+```
+This command starts the MongoDB server and sets the database path to `/data/db`, which is where MongoDB will store its data files.
+#### 2. Open MongoDB Shell (mongosh)
+Next, open a new terminal window and start the mongosh environment to interact with the MongoDB instance:
+```bash
+mongosh
+```
+This opens the MongoDB shell, where you can run MongoDB commands and interact with the database.
+
+### 3. Create an Admin User
+To create an admin user for MongoDB, we first enter the following command to enable us to create an admin user:
+```javascript
+db.createUser({
+  user: "admin",
+  pwd: "nnannaeze@77",
+  roles: [{ role: "root", db: "admin" }]
+})
+```
+Once the admin user is created, we can update the password of the existing `root`user if needed with the following command:
+```javascript
+db.updateUser("root", { pwd: "nnannaeze@77" });
+```
+This ensures that the `root` user has the correct password, and now we have an admin user with full access to the MongoDB instance.
+
+## MongoDB Workflow
 ### 1. **Importing Data into MongoDB**  
 To get started with the project, I obtained the dataset in JSON format (movie information) using the following `curl` command:
 
@@ -48,7 +79,16 @@ To get started with the project, I obtained the dataset in JSON format (movie in
 curl -O https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMSkillsNetwork-DB0151EN-edX/labs/FinalProject/movies.json
 ```
 This command downloaded the movies.json file, which contains data on various movies, including fields such as title, genre, year, director, and more.
-
+***Start MongoDB and Mongosh***
+-  to work with MongoDB in WSl, i will first Start the MongoDB using the following command 
+  '''bash
+  mongod --dbpath /data/db
+  ```
+-  Open a new Terminal and give the following command
+  ```bash
+  mongosh
+  ```
+-  while inside the mong
 
 To import the JSON data into MongoDB, I used the `mongoimport` tool. The command below was executed from the command line:
 
