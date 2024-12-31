@@ -79,16 +79,6 @@ To get started with the project, I obtained the dataset in JSON format (movie in
 curl -O https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMSkillsNetwork-DB0151EN-edX/labs/FinalProject/movies.json
 ```
 This command downloaded the movies.json file, which contains data on various movies, including fields such as title, genre, year, director, and more.
-***Start MongoDB and Mongosh***
--  to work with MongoDB in WSl, i will first Start the MongoDB using the following command 
-  '''bash
-  mongod --dbpath /data/db
-  ```
--  Open a new Terminal and give the following command
-  ```bash
-  mongosh
-  ```
--  while inside the mong
 
 To import the JSON data into MongoDB, I used the `mongoimport` tool. The command below was executed from the command line:
 
