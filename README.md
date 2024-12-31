@@ -1,19 +1,19 @@
 # NoSQL-Projects-Portfolio
-# 1. Project Overview
+## 1. Project Overview
 
-## Scenario  
+### Scenario  
 As a Data Engineer at a data analytics consulting firm, my primary role involves:  
 - Efficiently handling data across different formats, platforms, and databases.  
 - Integrating external datasets into NoSQL databases to support analytical workflows.  
 - Problem-solving real-world challenges by designing streamlined data ingestion and retrieval processes.  
 
-## Dataset Overview  
+### Dataset Overview  
 The dataset used for this project is a JSON file of movie information, showcasing various fields including title, genre, release year, and additional metadata. The data file was obtained using the following command:  
 ```bash
 curl -O https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMSkillsNetwork-DB0151EN-edX/labs/FinalProject/movies.json
 ```
 This dataset reflects common real-world requirements, where datasets from public or proprietary sources need to be processed and utilized effectively.
-## Goals  
+### Goals  
 This portfolio aims to demonstrate key competencies in NoSQL database management, including:
 
 - **Importing JSON data into MongoDB**.
